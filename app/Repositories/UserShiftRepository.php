@@ -13,13 +13,12 @@ class UserShiftRepository extends AbstractRepository
         $this->model = $userShift;
     }
 
-    public function getComingBackUsers(): ?Collection
+    public function getAllByCurrentDate(string $date): ?Collection
     {
         return $this->model->newQuery()
-            ->with(['estate'])
-            ->where([
-                'date_to' => Carbon::now()->format('Y-m-d'),
-            ])
+            ->with('estates')
+            ->where('date_from', $date)
+            ->orWhere('date_to', $date)
             ->get();
     }
 }

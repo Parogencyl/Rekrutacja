@@ -28,16 +28,13 @@ class SetFakeData extends Seeder
         UserShift::query()->insert([
             'user_id' => $users->first()->user_id,
             'substitute_user_id' => $users->last()->user_id,
-            'date_from' => Carbon::create(2022, 3, 1),
-            'date_to' => Carbon::create(2022, 4, 2),
+            'date_from' => Carbon::create(2023, 12, 21),
+            'date_to' => Carbon::create(2023, 12, 28),
         ]);
-
-        $userShift = UserShift::all();
 
         foreach (range(1, 50) as $item) {
             Estate::query()->insert([
                 'supervisor_user_id' => $users->random()->user_id,
-                'user_shift_id' => rand(0, 1) ? $userShift->random()->id : null,
                 'street' => $faker->streetName(),
                 'building_number' => $faker->buildingNumber(),
                 'city' => $faker->city(),

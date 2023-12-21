@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UserShift extends Model
@@ -29,8 +30,8 @@ class UserShift extends Model
         return $this->hasOne(User::class, 'user_id', 'substitute_user_id');
     }
 
-    public function estate(): HasOne
+    public function estates(): HasMany
     {
-        return $this->hasOne(Estate::class, 'user_shift_id', 'id');
+        return $this->hasMany(Estate::class, 'supervisor_user_id', 'user_id');
     }
 }
